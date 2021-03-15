@@ -1,0 +1,14 @@
+port: "8080"
+
+db:
+  uri: "mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb"
+  name: "auth_jwt"
+
+tokens:
+  key: "shlgkhldsf"
+  access:
+    ttl: "1"
+    type: "access"
+  refresh: 
+    ttl: "24"
+    type: refresh
