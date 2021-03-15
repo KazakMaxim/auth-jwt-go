@@ -44,7 +44,7 @@ func (s *TokensService) GenerateTokens(userGuid string) ([]string, error) {
 
 	guidTokenPaire := uuid.New().String()
 
-	generateAccessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, &tokenClaims{
+	generateAccessToken := jwt.NewWithClaims(jwt.SigningMethodHS512, &tokenClaims{
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(viper.GetDuration("tokens.access.ttl") * time.Hour).Unix(),
 			IssuedAt:  time.Now().Unix(),
@@ -59,7 +59,7 @@ func (s *TokensService) GenerateTokens(userGuid string) ([]string, error) {
 		return nil, accessErr
 	}
 
-	generateRefreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, &tokenClaims{
+	generateRefreshToken := jwt.NewWithClaims(jwt.SigningMethodHS512, &tokenClaims{
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(viper.GetDuration("tokens.refresh.ttl") * time.Hour).Unix(),
 			IssuedAt:  time.Now().Unix(),
